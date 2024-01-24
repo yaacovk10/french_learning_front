@@ -15,9 +15,10 @@ export function Login() {
   return (
     <div>
       <div className={styles.row}>
-        {logged?"logged":"not logged"}
+        {logged?"logged- from login":"not logged from login"}
+        <br/>
         UserName : <input onChange={(e)=>setuserName(e.target.value)}/>
-        Password : <input onChange={(e)=>setpassword(e.target.value)}/>
+        Password : <input type='password' onChange={(e)=>setpassword(e.target.value)}/>
         <button
           className={styles.button}
           onClick={() => dispatch(loginAsync({username,password}))}
