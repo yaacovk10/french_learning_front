@@ -6,7 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Waga from './Waga';
+import Menu from './features/counter/Menu';
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
@@ -17,7 +17,7 @@ root.render(
                 <Routes>
                     <Route path="/" element={<App />} >
                         <Route path="samp" element={<h1>Samp</h1>} />
-                        <Route path="waga" element={<Waga></Waga>} />
+                        <Route path="menu" element={<Menu></Menu>} />
                     </Route>
                 </Routes>
             </Provider>
