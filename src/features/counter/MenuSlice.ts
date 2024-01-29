@@ -40,8 +40,15 @@ export const menuSlice = createSlice({
       .addCase(menuAsync.pending, (state) => {
         state.status = 'loading';
       })
+      .addCase(menuAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.items = action.payload;
+      })
+      .addCase(menuAsync.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message ?? "Unknown error"; // Use default message if error message is undefined
+      });
   },
-  
 });
 
 
