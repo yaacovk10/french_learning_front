@@ -16,7 +16,6 @@ root.render(
             <Provider store={store}>
                 <Routes>
                     <Route path="/" element={<App />} >
-                        <Route path="samp" element={<h1>Samp</h1>} />
                         <Route path="menu" element={<Menu></Menu>} />
                     </Route>
                 </Routes>

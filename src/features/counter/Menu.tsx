@@ -10,21 +10,9 @@ interface Lesson {
 }
 
 function Menu() {
-  const MY_SERVER = "http://127.0.0.1:8000/lessons/"
-  const [lessons, setlessons] = useState<Lesson[]>([]);
-  useEffect(() => {
-    axios.get(`http://127.0.0.1:8000/lessons/`).then(res => setlessons(res.data))
-  }, [])
-
-  
-  console.log(lessons[0])
-  
+ 
   return (
-    <div className="App">
-        <h1>Menu</h1>
-        {lessons.map((lesson, index) => (
-      <p key={index}> {lesson.name_hebrew}</p>
-    ))}
+    <div>
         
     </div>
   );

@@ -15,7 +15,7 @@ export function Login() {
   return (
     <div>
       <div className={styles.row}>
-        {logged?"logged- from login":"not logged from login"}
+        {logged?"logged":"not logged"}
         <br/>
         UserName : <input onChange={(e)=>setuserName(e.target.value)}/>
         Password : <input type='password' onChange={(e)=>setpassword(e.target.value)}/>

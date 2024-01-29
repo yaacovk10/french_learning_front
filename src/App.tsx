@@ -15,8 +15,7 @@ function App() {
 
                 app: {logged &&
                     <div>
-                        <Link to="samp">samp</Link>
-                        <Link to="waga">waga</Link>
+                        <Link to="menu">menu</Link>
                     </div>}
                     {!logged &&                 <Login></Login>}
                 <Outlet />
