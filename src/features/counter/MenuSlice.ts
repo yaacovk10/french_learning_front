@@ -16,9 +16,12 @@ const initialState: menuState = {
 export const menuAsync = createAsyncThunk(
   'menu/menu',
   async () => {
-    const response = await fetchMenu();
-    // The value we return becomes the `fulfilled` action payload
-    return response.data;
+    try {
+      const response = await fetchMenu();
+      return response;
+    } catch (error) {
+      throw error; // Throw the error to be caught by Redux Toolkit's rejected action
+    }
   }
 );
 
