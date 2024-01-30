@@ -1,8 +1,16 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { fetchMenu } from './MenuAPI';
+import { RootState } from '../../app/store';
+
+interface MenuItem {
+  id: number;
+  name_english: string;
+  name_hebrew: string;
+  name_french: string;
+}
 
 export interface menuState {
-  items: [];
+  items: MenuItem[];
   status: 'idle' | 'loading' | 'failed';
   error: string | null; // Add error field to store potential error messages
 }
@@ -14,7 +22,7 @@ const initialState: menuState = {
 };
 
 export const menuAsync = createAsyncThunk(
-  'menu/menu',
+  'menu/fetchMenu',
   async () => {
     try {
       const response = await fetchMenu();
@@ -51,6 +59,8 @@ export const menuSlice = createSlice({
   },
 });
 
+
+export const selectMenu = (state: RootState) => state.menu.items;
 
 export default menuSlice.reducer;
 

@@ -2,12 +2,14 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
 import loginReducer from '../features/counter/loginSlice';
 import MenuReducer from '../features/counter/MenuSlice';
+import lessonContentReducer  from '../features/counter/LessonContentSlice';
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     login : loginReducer,
-    menu : MenuReducer
+    menu : MenuReducer,
+    lessonContent: lessonContentReducer
   },
 });
 

@@ -6,7 +6,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Menu from './features/counter/Menu';
+// import Menu from './features/counter/Menu';
+import { Menu } from './features/counter/Menu';
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
