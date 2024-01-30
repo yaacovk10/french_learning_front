@@ -12,15 +12,10 @@ function App() {
     return (
         <div className="App">
             <header className="App-header">
-
-                app: {logged &&
-                    <div>
-                        <Link to="menu">menu</Link>
-                    </div>}
-                    {!logged &&                 <Login></Login>}
+                <Login />
+                <Link to="menu">menu</Link>
                 <Outlet />
             </header>
-
         </div>
     );
 }

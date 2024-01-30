@@ -1,31 +1,38 @@
 import React, { useState } from 'react';
-
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import styles from './Counter.module.css';
-import { selectlogged, loginAsync } from './loginSlice';
+import { selectlogged, loginAsync , logout} from './loginSlice';
 
 export function Login() {
   const logged = useAppSelector(selectlogged);
+  console.log("Logged state:", logged); // Debugging log
+  
   const dispatch = useAppDispatch();
-  const [incrementAmount, setIncrementAmount] = useState('2');
-
-  const incrementValue = Number(incrementAmount) || 0;
   const [username, setuserName] = useState("")
   const [password, setpassword] = useState("")
+  
   return (
     <div>
       <div className={styles.row}>
-        {logged?"logged":"not logged"}
-        <br/>
-        UserName : <input onChange={(e)=>setuserName(e.target.value)}/>
-        Password : <input type='password' onChange={(e)=>setpassword(e.target.value)}/>
-        <button
-          className={styles.button}
-          onClick={() => dispatch(loginAsync({username,password}))}
-        >
-          Login
-        </button>
-        
+        {logged ? (
+          <div>
+            <span>Logged in</span>
+            <button className={styles.button} onClick={() => dispatch(logout())}>
+              Logout
+            </button>
+          </div>
+        ) : (
+          <div>
+            UserName: <input onChange={(e) => setuserName(e.target.value)} />
+            Password: <input type='password' onChange={(e) => setpassword(e.target.value)} />
+            <button
+              className={styles.button}
+              onClick={() => dispatch(loginAsync({ username, password }))}
+            >
+              Login
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
