@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { menuAsync, menuState } from './MenuSlice';
 import { AppDispatch, RootState } from '../../app/store';
 import LessonContent from './LessonContent';
+import Nav from 'react-bootstrap/Nav';
 
 
 export function Menu() {
@@ -13,15 +14,13 @@ export function Menu() {
   useEffect(() => {
     dispatch(menuAsync());
   }, [dispatch]);
-  
 
   const handleMenuItemClick = (lessonId: number) => {
     setSelectedLessonId(lessonId);
-    };
+  };
 
   return (
-    
-    <div className="d-flex">
+    <div className="d-flex justify-content-end">
       <div className="flex-grow-1 p-3">
         {selectedLessonId && <LessonContent lessonId={selectedLessonId} />}
       </div>
@@ -37,8 +36,5 @@ export function Menu() {
         </ul>
       </div>
     </div>
-  
   );
-
- }
-
+}

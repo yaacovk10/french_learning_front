@@ -11,11 +11,11 @@ function App() {
     const logged = useAppSelector(selectlogged)
     return (
         <div className="App">
-            <header className="App-header">
+            {/* <header className="App-header"> */}
                 <Login />
                 <Link to="menu">menu</Link>
                 <Outlet />
-            </header>
+            {/* </header> */}
         </div>
     );
 }
