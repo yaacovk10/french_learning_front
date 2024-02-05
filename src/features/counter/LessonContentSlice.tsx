@@ -6,6 +6,7 @@ export interface LessonContentItem{
     word_english: string,
     word_hebrew: string,
     word_french: string,
+    word_key: string,
     lesson: number
 }
 

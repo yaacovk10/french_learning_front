@@ -23,7 +23,7 @@ const LessonContent = ({ lessonId }: { lessonId: number }) => {
 
     useEffect(() => {
         content.forEach((word: LessonContentItem) => {
-            fetch(`https://api.pexels.com/v1/search?query=${word.word_english}&per_page=1`, {
+            fetch(`https://api.pexels.com/v1/search?query=${word.word_key}&per_page=1`, {
                 headers: {
                     'Authorization': apiKey,
                 }
@@ -42,27 +42,29 @@ const LessonContent = ({ lessonId }: { lessonId: number }) => {
     if (status === 'loading') return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
     console.log("no status or error")
-    return <div>
-        {content.map((item: LessonContentItem) => (
-            <div key={item.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-                {/* Word in French */}
-                <p style={{ marginRight: '30px' }}>{item.word_french}</p>
+    return (
+        // Use 'justify-content-end' to align items to the right
+        <div className="container d-flex flex-column align-items-end">
+            {content.map((item: LessonContentItem) => (
+                <div key={item.id} className="d-flex justify-content-end align-items-center mb-3">
+                    {/* French word (left) */}
+                    <div className="text-end" style={{ minWidth: "100px" }}>{item.word_french}</div>
 
-                {/* Image */}
-                {photos[item.id] && (
-                    <img
-                        src={photos[item.id]}
-                        alt={item.word_english}
-                        style={{ width: '100px', height: '100px', objectFit: 'cover' }}
-                    />
-                )}
+                    {/* Image (center) */}
+                    {photos[item.id] && (
+                        <img 
+                            src={photos[item.id]} 
+                            alt={item.word_english} 
+                            className="img-fluid ms-3 me-3" 
+                            style={{ width: '200px', height: '200px', objectFit: 'cover' }}
+                        />
+                    )}
 
-                {/* Word in Hebrew */}
-                <p style={{ marginLeft: '20px' }}>{item.word_hebrew}</p>
-            </div>
-        ))}
-    </div>;
-
+                    {/* Hebrew word (right) */}
+                    <div style={{ minWidth: "100px" }}>{item.word_hebrew}</div>
+                </div>
+            ))}
+        </div>
+    );
 }
-
 export default LessonContent
