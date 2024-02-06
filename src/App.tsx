@@ -6,15 +6,15 @@ import { Login } from './features/counter/Login';
 import { selectlogged } from './features/counter/loginSlice';
 import { useAppSelector } from './app/hooks';
 import { Link, Outlet } from 'react-router-dom';
+import HorizontalNavbar from './features/counter/HorizontalNavbar';
 
 function App() {
     const logged = useAppSelector(selectlogged)
     return (
         <div className="App">
             {/* <header className="App-header"> */}
-                <Login />
-                <Link to="menu">menu</Link>
-                <Outlet />
+            <HorizontalNavbar/>
+            <Outlet /> {/* This is where your routed components will be rendered */}
             {/* </header> */}
         </div>
     );
