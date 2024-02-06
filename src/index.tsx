@@ -8,6 +8,8 @@ import './index.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 // import Menu from './features/counter/Menu';
 import { Menu } from './features/counter/Menu';
+import { Login } from './features/counter/Login';
+
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
@@ -17,7 +19,8 @@ root.render(
             <Provider store={store}>
                 <Routes>
                     <Route path="/" element={<App />} >
-                        <Route path="menu" element={<Menu></Menu>} />
+                        <Route path="menu" element={<Menu/>} />
+                        <Route path="login" element={<Login/>}/>
                     </Route>
                 </Routes>
             </Provider>
