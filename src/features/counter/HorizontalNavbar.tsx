@@ -1,21 +1,33 @@
-// HorizontalNavbar.js
+// HorizontalNavbar.tsx
 import React from 'react';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 const HorizontalNavbar = () => {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+    <Navbar collapseOnSelect expand="lg" bg="light" variant="light" dir="rtl">
       <Container>
-        <Navbar.Brand href="#home">My App</Navbar.Brand>
+        <LinkContainer to="/lessons">
+          <Navbar.Brand>האפליקציה שלי</Navbar.Brand>
+        </LinkContainer>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="#lessons">Lessons</Nav.Link>
-            <Nav.Link href="#exercise">Exercise</Nav.Link>
-            <NavDropdown title="Account" id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="#login">Login</NavDropdown.Item>
-              <NavDropdown.Item href="#signup">Sign Up</NavDropdown.Item>
+          <Nav className="ms-auto"> {/* Changed from me-auto to ms-auto */}
+            {/* Reversed the order of items to fit RTL layout */}
+            <NavDropdown title="חשבון" id="collapsible-nav-dropdown" className="order-3">
+              <LinkContainer to="/login">
+                <NavDropdown.Item>התחברות</NavDropdown.Item>
+              </LinkContainer>
+              <LinkContainer to="/signup">
+                <NavDropdown.Item>הרשמה</NavDropdown.Item>
+              </LinkContainer>
             </NavDropdown>
+            <LinkContainer to="/exercise" className="order-2">
+              <Nav.Link>תרגול</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/lessons" className="order-1">
+              <Nav.Link>שיעורים</Nav.Link>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Container>

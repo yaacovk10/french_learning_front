@@ -55,14 +55,10 @@ const LessonContent = ({ lessonId }: { lessonId: number }) => {
     return(
         <div className="container">
             {content.map((item: LessonContentItem) => (
-                <div key={item.id} className="d-flex justify-content-end align-items-center mb-3">
-                    {/* French word (left) with Listen Button */}
-                    <div className="me-3 text-end" style={{ minWidth: "100px" }}>
-                        {item.word_french}
-                        <button onClick={() => speakText(item.word_french)} className="ms-2">
-                        <FontAwesomeIcon icon={faVolumeUp} />
-                        </button>
-                    </div>
+                <div key={item.id} className="d-flex justify-content-start align-items-center mb-3" style={{direction:'rtl'}}>{/*Adjusted for RTL*/}
+                    
+                    {/* Hebrew word (right) */}
+                    <div className="ms-3" style={{ minWidth: "100px" }}>{item.word_hebrew}</div>
 
                     {/* Image (center) */}
                     {photos[item.id] && (
@@ -70,12 +66,22 @@ const LessonContent = ({ lessonId }: { lessonId: number }) => {
                             src={photos[item.id]} 
                             alt={item.word_english} 
                             className="img-fluid" 
-                            style={{ width: '100px', height: '100px', objectFit: 'cover' }}
+                            style={{ width: '200px', height: '200px', objectFit: 'cover' }}
                         />
                     )}
+                    {/* French word (left) with Listen Button */}
+                    <div className="me-3" >
+                        {item.word_french}
+                        <button onClick={() => speakText(item.word_french)} className="ms-2">
+                        <FontAwesomeIcon icon={faVolumeUp} />
+                        </button>
+                    </div>
 
-                    {/* Hebrew word (right) */}
-                    <div className="ms-3" style={{ minWidth: "100px" }}>{item.word_hebrew}</div>
+
+
+
+
+                   
                 </div>
             ))}
         </div>

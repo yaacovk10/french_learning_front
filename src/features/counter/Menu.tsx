@@ -19,26 +19,29 @@ export function Menu() {
     setSelectedLessonId(lessonId);
   };
 
-  return (
-    <div className="d-flex justify-content-end">
-      <div className="flex-grow-1 p-3">
-        {selectedLessonId && <LessonContent lessonId={selectedLessonId} />}
-      </div>
-      <div className="flex-shrink-0 p-3 bg-light" style={{ width: "280px" }}>
-        <Nav defaultActiveKey="/home" className="flex-column">
+  return(
+    <div style={{ display: 'flex', height: '100vh', width: '100%' }}> {/* Ensure full width */}
+      {/* Sidebar */}
+      <nav style={{ minWidth: '280px', backgroundColor: '#f8f9fa', padding: '20px' }}>
+        <Nav className="flex-column">
           {items.map(item => (
             <Nav.Link
               key={item.id}
               eventKey={item.id.toString()}
-              href="#"
               onClick={() => handleMenuItemClick(item.id)}
-              active={selectedLessonId === item.id}
             >
               {item.name_hebrew}
             </Nav.Link>
           ))}
         </Nav>
+      </nav>
+
+      {/* Main content area adjustment for better control */}
+      <div style={{ flexGrow: 1, padding: '20px'}}>
+        {/* This ensures LessonContent is more centered/aligned as needed */}
+        {selectedLessonId && <LessonContent lessonId={selectedLessonId} />}
       </div>
     </div>
+
   );
 }
