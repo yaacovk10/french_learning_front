@@ -9,7 +9,7 @@ export const store = configureStore({
     counter: counterReducer,
     login : loginReducer,
     menu : MenuReducer,
-    lessonContent: lessonContentReducer
+    lessonContent: lessonContentReducer, 
   },
   devTools: process.env.NODE_ENV !== 'production'
 });
