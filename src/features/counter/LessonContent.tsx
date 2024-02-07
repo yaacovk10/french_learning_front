@@ -4,48 +4,22 @@ import { AppDispatch, RootState } from '../../app/store';
 import { LessonContentItem, fetchContent } from './LessonContentSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVolumeUp } from '@fortawesome/free-solid-svg-icons';
+import { useFetchPhotos } from './useFetchPhotos';
+import { speakText } from './speakText';
 
 
-const apiKey = 'o5Ck3cUb2KGWhBS6JGemEySVYjdWsquLK0NtrFvGD1YdyxagNM1bBD1G';
-
-interface Photos {
-    [key: string]: string;
-}
 
 const LessonContent = ({ lessonId }: { lessonId: number }) => {
     const dispatch = useDispatch<AppDispatch>();
     const { content, status, error } = useSelector((state: RootState) => state.lessonContent);
-    const [photos, setPhotos] = useState<Photos>({});
+    // const [photos, setPhotos] = useState<Photos>({});
+    const photos = useFetchPhotos(content)
 
     console.log("lessonId: " + lessonId)
 
     useEffect(() => {
         dispatch(fetchContent(lessonId));
     }, [dispatch, lessonId])
-
-    useEffect(() => {
-        content.forEach((word: LessonContentItem) => {
-            fetch(`https://api.pexels.com/v1/search?query=${word.word_key}&per_page=1`, {
-                headers: {
-                    'Authorization': apiKey,
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.photos.length > 0) {
-                        setPhotos(prev => ({ ...prev, [word.id]: data.photos[0].src.large }));
-                    }
-                })
-                .catch(console.error);
-        });
-    }, [content]);
-
-     // Function to speak the text
-     const speakText = (text: string) => {
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'fr-FR'; // Set to French
-        speechSynthesis.speak(utterance);
-    };
 
 
     // Render content based on status
