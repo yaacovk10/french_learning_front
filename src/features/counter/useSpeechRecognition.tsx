@@ -24,17 +24,26 @@ export const useSpeechRecognition = (
     recognition = new SpeechRecognition();
   }
 
-  const startListening = () => {
-    if (recognition) {
-      setIsListening(true);
-      recognition.start();
-    }
-  };
+  let silenceTimer: ReturnType<typeof setTimeout> | null = null;
 
   const stopListening = () => {
     if (recognition) {
       setIsListening(false);
       recognition.stop();
+      if (silenceTimer) clearTimeout(silenceTimer); // Clear the silence timer when recognition stops
+    }
+  };
+
+  const startListening = () => {
+    if (recognition) {
+      setIsListening(true);
+      recognition.start();
+
+      if (silenceTimer) clearTimeout(silenceTimer);
+      silenceTimer = setTimeout(() => {
+        console.log("Silence detected, stopping recognition.");
+        stopListening();
+      }, 1000); // Set the silence timeout to 1 second
     }
   };
 
@@ -44,22 +53,30 @@ export const useSpeechRecognition = (
       return;
     }
 
-    recognition!.continuous = true;
-    recognition!.lang = lang;
-    recognition!.interimResults = false;
+    recognition.continuous = true;
+    recognition.lang = lang;
+    recognition.interimResults = true;
 
-    recognition!.onresult = (event: any) => {
+    recognition.onresult = (event: any) => {
       const transcript = event.results[event.results.length - 1][0].transcript;
       onResult(transcript);
+
+      if (silenceTimer) clearTimeout(silenceTimer);
+      silenceTimer = setTimeout(() => {
+        console.log("Silence detected, stopping recognition.");
+        stopListening();
+      }, 1000);
     };
 
-    recognition!.onerror = (event: any) => {
+    recognition.onerror = (event: any) => {
+      setIsListening(false); // Ensure isListening is reset on error
+      if (silenceTimer) clearTimeout(silenceTimer); // Clear the silence timer on error
       if (onError) onError(event.error);
     };
 
-    // Cleanup function to stop recognition when the component unmounts or the effect re-runs
     return () => {
-      recognition!.stop();
+      if (recognition) recognition.stop();
+      if (silenceTimer) clearTimeout(silenceTimer);
     };
   }, [onResult, onError, lang, recognition]);
 

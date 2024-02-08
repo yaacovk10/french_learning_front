@@ -10,7 +10,7 @@ import { useFetchPhotos } from './useFetchPhotos';
 
 const ExerciseComponent = ({ lessonId }: { lessonId: number }) => {
   // Use the same selector as in LessonContent to get the content
-  const dispach = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>();
   const { content } = useSelector((state: RootState) => state.lessonContent);
   const photos = useFetchPhotos(content)
   
@@ -18,8 +18,8 @@ const ExerciseComponent = ({ lessonId }: { lessonId: number }) => {
 
 
   useEffect(() => {
-    dispach(fetchContent(lessonId));
-}, [dispach, lessonId])
+    dispatch(fetchContent(lessonId));
+}, [dispatch, lessonId])
 
   const { startListening, isListening } = useSpeechRecognition(
     (text) => console.log("Recognized text:", text),
