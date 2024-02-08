@@ -12,7 +12,6 @@ import { speakText } from './speakText';
 const LessonContent = ({ lessonId }: { lessonId: number }) => {
     const dispatch = useDispatch<AppDispatch>();
     const { content, status, error } = useSelector((state: RootState) => state.lessonContent);
-    // const [photos, setPhotos] = useState<Photos>({});
     const photos = useFetchPhotos(content)
 
     console.log("lessonId: " + lessonId)

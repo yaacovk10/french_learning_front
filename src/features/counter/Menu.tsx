@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { menuAsync, menuState } from './MenuSlice';
 import { AppDispatch, RootState } from '../../app/store';
 import LessonContent from './LessonContent';
 import Nav from 'react-bootstrap/Nav';
+import ExerciseComponent from './Exercise';
 
 
 export function Menu() {
   const dispatch = useDispatch<AppDispatch>();
   const { status, items, error } = useSelector((state: { menu: menuState }) => state.menu)
   const [selectedLessonId, setSelectedLessonId] = useState<number | null>(null);
+  const location = useLocation();
 
   useEffect(() => {
     dispatch(menuAsync());
@@ -39,7 +42,8 @@ export function Menu() {
       {/* Main content area adjustment for better control */}
       <div style={{ flexGrow: 1, padding: '20px'}}>
         {/* This ensures LessonContent is more centered/aligned as needed */}
-        {selectedLessonId && <LessonContent lessonId={selectedLessonId} />}
+        {location.pathname.startsWith('/lesson') && selectedLessonId && <LessonContent lessonId={selectedLessonId}/>}
+        {location.pathname.startsWith('/exercise') && selectedLessonId && <ExerciseComponent lessonId={selectedLessonId}/>}
       </div>
     </div>
 
