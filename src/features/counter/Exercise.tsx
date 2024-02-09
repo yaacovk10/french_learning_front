@@ -1,5 +1,5 @@
 // src/features/exercise/ExerciseComponent.tsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../app/store';
 import { LessonContentItem, fetchContent } from './LessonContentSlice';
@@ -14,6 +14,9 @@ const ExerciseComponent = ({ lessonId }: { lessonId: number }) => {
   const { content } = useSelector((state: RootState) => state.lessonContent);
   const photos = useFetchPhotos(content)
   
+  //State to store the recognized text
+  const [recognizedText, setrecognizedText]= useState('')
+
   console.log("lessonId: " + lessonId)
 
 
@@ -22,7 +25,10 @@ const ExerciseComponent = ({ lessonId }: { lessonId: number }) => {
 }, [dispatch, lessonId])
 
   const { startListening, isListening } = useSpeechRecognition(
-    (text) => console.log("Recognized text:", text),
+    (text) => {
+      console.log("Recognized text:", text);
+      setrecognizedText(text);
+    },
     (error) => console.error("Recognition error:", error),
     'fr-FR' // Set the recognition language to French
   );
@@ -48,6 +54,10 @@ const ExerciseComponent = ({ lessonId }: { lessonId: number }) => {
           <button onClick={startListening} disabled={isListening}>
             <FontAwesomeIcon icon={faMicrophone} />
           </button>
+          {/* Display the recognized text*/}
+          <div style={{marginLeft: '10px'}}>
+        {isListening?<em>Listening ...</em> : recognizedText && <span>Recognized: {recognizedText}</span>}
+          </div>
         </div>
       ))}
     </div>
