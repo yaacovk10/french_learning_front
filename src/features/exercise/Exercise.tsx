@@ -2,11 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../app/store';
-import { LessonContentItem, fetchContent } from './LessonContentSlice';
+import { LessonContentItem, fetchContent } from '../lessons/LessonContentSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMicrophone } from '@fortawesome/free-solid-svg-icons';
-import { useSpeechRecognition } from '../counter/useSpeechRecognition';
-import { useFetchPhotos } from './useFetchPhotos';
+import { useSpeechRecognition } from '../../shared/hooks/useSpeechRecognition';
+import { useFetchPhotos } from '../../shared/hooks/useFetchPhotos';
 import ExerciseItem from './ExerciseItem';
 
 const ExerciseComponent = ({ lessonId }: { lessonId: number }) => {
@@ -18,7 +18,7 @@ const ExerciseComponent = ({ lessonId }: { lessonId: number }) => {
   //State to store the recognized text
   const [recognizedText, setrecognizedText]= useState('')
 
-  console.log("lessonId: " + lessonId)
+  console.log("content", content)
 
 
   useEffect(() => {

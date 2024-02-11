@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import styles from './Counter.module.css';
 import { selectlogged, loginAsync , logout} from './loginSlice';
+import styles from './Login.module.css';
 
 export function Login() {
   const logged = useAppSelector(selectlogged);

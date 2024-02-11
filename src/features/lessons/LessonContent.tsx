@@ -4,9 +4,8 @@ import { AppDispatch, RootState } from '../../app/store';
 import { LessonContentItem, fetchContent } from './LessonContentSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVolumeUp } from '@fortawesome/free-solid-svg-icons';
-import { useFetchPhotos } from './useFetchPhotos';
-import { speakText } from './speakText';
-
+import { speakText } from '../../shared/utils/speakText';
+import { useFetchPhotos } from '../../shared/hooks/useFetchPhotos';
 
 
 const LessonContent = ({ lessonId }: { lessonId: number }) => {

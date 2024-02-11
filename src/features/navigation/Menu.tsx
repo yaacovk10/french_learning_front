@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { menuAsync, menuState } from './MenuSlice';
 import { AppDispatch, RootState } from '../../app/store';
-import LessonContent from './LessonContent';
+import LessonContent from '../lessons/LessonContent';
 import Nav from 'react-bootstrap/Nav';
-import ExerciseComponent from './Exercise';
+import ExerciseComponent from '../exercise/Exercise';
 
 
 export function Menu() {
@@ -13,7 +13,8 @@ export function Menu() {
   const { status, items, error } = useSelector((state: { menu: menuState }) => state.menu)
   const [selectedLessonId, setSelectedLessonId] = useState<number | null>(null);
   const location = useLocation();
-
+  console.log("selectedLessonId: " , selectedLessonId )
+  
   useEffect(() => {
     dispatch(menuAsync());
   }, [dispatch]);

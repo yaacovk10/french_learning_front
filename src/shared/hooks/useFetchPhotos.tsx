@@ -1,6 +1,6 @@
 // useFetchPhotos.ts
 import { useEffect, useState } from 'react';
-import { LessonContentItem } from './LessonContentSlice';
+import { LessonContentItem } from '../../features/lessons/LessonContentSlice';
 
 interface Photos {
   [key: string]: string;

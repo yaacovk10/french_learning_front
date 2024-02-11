@@ -6,8 +6,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { Menu } from './features/counter/Menu';
-import { Login } from './features/counter/Login';
+import { Menu } from './features/navigation/Menu';
+import { Login } from './features/authentication/Login';
 
 
 const container = document.getElementById('root')!;

@@ -1,12 +1,10 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
-import loginReducer from '../features/counter/loginSlice';
-import MenuReducer from '../features/counter/MenuSlice';
-import lessonContentReducer  from '../features/counter/LessonContentSlice';
+import loginReducer from '../features/authentication/loginSlice';
+import MenuReducer from '../features/navigation/MenuSlice';
+import lessonContentReducer  from '../features/lessons/LessonContentSlice';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
     login : loginReducer,
     menu : MenuReducer,
     lessonContent: lessonContentReducer, 
