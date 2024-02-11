@@ -23,7 +23,7 @@ export const loginAsync = createAsyncThunk(
   async (credentials:{username: string, password:string}) => {
     const response = await login(credentials);
     // The value we return becomes the `fulfilled` action payload
-    console.log("login async response ", response.data)
+    // console.log("login async response ", response.data)
     return response.data;
   }
 );
@@ -61,6 +61,7 @@ export const { logout } = loginSlice.actions;
 export const selectstatus = (state: RootState) => state.login.status;
 export const selectlogged = (state: RootState) => state.login.logged;
 export const selectToken = (state: RootState) => state.login.token;
+export const selectUsername = (state: RootState) => state.login.username;
 
 export default loginSlice.reducer;
 

@@ -8,6 +8,7 @@ import './index.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Menu } from './features/navigation/Menu';
 import { Login } from './features/authentication/Login';
+import AboutPage from './features/AboutPage';
 
 
 const container = document.getElementById('root')!;
@@ -22,6 +23,7 @@ root.render(
                         <Route path="lessons" element={<Menu/>} />
                         <Route path="exercise" element={<Menu/>}/>
                         <Route path="login" element={<Login/>}/>
+                        <Route path='/about' element={<AboutPage/>}/>
                     </Route>
                 </Routes>
             </Provider>

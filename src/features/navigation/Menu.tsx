@@ -26,7 +26,7 @@ export function Menu() {
   return(
     <div style={{ display: 'flex', height: '100vh', width: '100%' }}> {/* Ensure full width */}
       {/* Sidebar */}
-      <nav style={{ minWidth: '280px', backgroundColor: '#f8f9fa', padding: '20px' }}>
+      <nav style={{ minWidth: '280px', backgroundColor: '#ffcccc', padding: '20px' }}>
         <Nav className="flex-column">
           {items.map(item => (
             <Nav.Link
