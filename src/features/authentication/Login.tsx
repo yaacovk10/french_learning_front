@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { selectlogged, loginAsync , logout} from './loginSlice';
+import { selectlogged, loginAsync , logout, selectstatus} from './loginSlice';
+import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
 
 export function Login() {
-  const logged = useAppSelector(selectlogged);
-  console.log("Logged state:", logged); // Debugging log
-  
+  const logged = useAppSelector(selectlogged);  
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [username, setuserName] = useState("")
   const [password, setpassword] = useState("")
+  const loginStatus = useAppSelector(selectstatus)
+
+  useEffect(()=>{
+    if (logged){
+      navigate('/lessons'); //Redirect to lessons page after login
+    }
+  }, [logged, navigate]);
   
   return (
     <div>
@@ -23,13 +30,13 @@ export function Login() {
           </div>
         ) : (
           <div>
-            UserName: <input onChange={(e) => setuserName(e.target.value)} />
-            Password: <input type='password' onChange={(e) => setpassword(e.target.value)} />
+            שם משתמש: <input onChange={(e) => setuserName(e.target.value)} />
+            סיסמה: <input type='password' onChange={(e) => setpassword(e.target.value)} />
             <button
               className={styles.button}
               onClick={() => dispatch(loginAsync({ username, password }))}
             >
-              Login
+              התחברות
             </button>
           </div>
         )}

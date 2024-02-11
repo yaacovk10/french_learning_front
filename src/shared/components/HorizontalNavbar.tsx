@@ -2,8 +2,13 @@
 import React from 'react';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { logout, selectlogged } from '../../features/authentication/loginSlice';
 
 const HorizontalNavbar = () => {
+  const logged = useAppSelector(selectlogged)
+  const dispach = useAppDispatch();
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light" dir="rtl">
       <Container>
@@ -14,13 +19,19 @@ const HorizontalNavbar = () => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ms-auto"> {/* Changed from me-auto to ms-auto */}
             {/* Reversed the order of items to fit RTL layout */}
-            <NavDropdown title="חשבון" id="collapsible-nav-dropdown" className="order-3">
-              <LinkContainer to="/login">
-                <NavDropdown.Item>התחברות</NavDropdown.Item>
-              </LinkContainer>
-              <LinkContainer to="/signup">
-                <NavDropdown.Item>הרשמה</NavDropdown.Item>
-              </LinkContainer>
+             <NavDropdown title="חשבון" id="collapsible-nav-dropdown" className="order-3">
+              {logged ? (
+                <NavDropdown.Item onClick={() => dispach(logout())}>התנתקות</NavDropdown.Item>
+              ) : (
+                <>
+                  <LinkContainer to="/login">
+                    <NavDropdown.Item>התחברות</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/signup">
+                    <NavDropdown.Item>הרשמה</NavDropdown.Item>
+                  </LinkContainer>
+                </>
+              )}
             </NavDropdown>
             <LinkContainer to="/exercise" className="order-2">
               <Nav.Link>תרגול</Nav.Link>
