@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../app/store';
 import { login } from './LoginAPI';
 
+// Defines the shape of the login state within the Redux store
 export interface loginState {
   username: string;
   password: string;
@@ -10,6 +11,7 @@ export interface loginState {
   logged: boolean
 }
 
+// Initial state for the login slice, sets the default values
 const initialState: loginState = {
   username: "",
   password: "",
@@ -18,26 +20,25 @@ const initialState: loginState = {
   logged: false
 };
 
+// Asynchronous thunk action for performing the login operation
 export const loginAsync = createAsyncThunk(
   'login/login',
   async (credentials:{username: string, password:string}) => {
-    const response = await login(credentials);
-    // The value we return becomes the `fulfilled` action payload
-    // console.log("login async response ", response.data)
-    return response.data;
+    const response = await login(credentials);// Calls the login API function
+    return response.data;// The return value becomes the `fulfilled` action payload
   }
 );
 
+// The slice for the login feature, defining reducers and handling asynchronous actions
 export const loginSlice = createSlice({
   name: 'login',
   initialState,
-  // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    // Add logout reducer
+     // Reducer to handle user logout
     logout: (state) => {
       state.logged = false;
       state.token = '';
-      localStorage.removeItem('token');
+      localStorage.removeItem('token');// Clear token from localStorage on logout
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -45,19 +46,18 @@ export const loginSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(loginAsync.fulfilled, (state, action) => {
-        state.token = action.payload.access;
-        state.logged = true;
-        localStorage.setItem('token', action.payload.access);
+        state.token = action.payload.access;// Set the token upon successful login
+        state.logged = true; // Update logged state to true
+        localStorage.setItem('token', action.payload.access); // Optionally store the token in localStorage
         state.status = 'loading';
       })
   },
 });
 
+// Export actions for use in UI components
 export const { logout } = loginSlice.actions;
 
-// The function below is called a selector and allows us to select a value from
-// the state. Selectors can also be defined inline where they're used instead of
-// in the slice file. For example: `useSelector((state: RootState) => state.login.value)`
+// Selector functions to access specific pieces of the login state
 export const selectstatus = (state: RootState) => state.login.status;
 export const selectlogged = (state: RootState) => state.login.logged;
 export const selectToken = (state: RootState) => state.login.token;

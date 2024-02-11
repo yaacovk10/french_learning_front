@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { fetchMenu } from './MenuAPI';
 import { RootState } from '../../app/store';
 
+// Defines the structure for each menu item
 interface MenuItem {
   id: number;
   name_english: string;
@@ -9,36 +10,38 @@ interface MenuItem {
   name_french: string;
 }
 
+// Type definition for the menu state within the Redux store
 export interface menuState {
-  items: MenuItem[];
-  status: 'idle' | 'loading' | 'failed';
-  error: string | null; // Add error field to store potential error messages
+  items: MenuItem[];// Array of menu items
+  status: 'idle' | 'loading' | 'failed';// Loading status indicator
+  error: string | null; // Field for storing error messages, if any
 }
 
+// Initial state for the menu slice
 const initialState: menuState = {
   items: [],
   status: 'idle',
   error: null,
 };
 
+// Asynchronous thunk for fetching the menu from the backend
 export const menuAsync = createAsyncThunk(
   'menu/fetchMenu',
   async () => {
     try {
-      const response = await fetchMenu();
-      return response;
+      const response = await fetchMenu(); // Attempt to fetch menu data
+      return response; // Return fetched data to be handled by the reducer
     } catch (error) {
-      throw error; // Throw the error to be caught by Redux Toolkit's rejected action
+      throw error; // Propagate any errors for handling by extraReducers
     }
   }
 );
 
 
-
+// The slice for handling menu-related state and actions
 export const menuSlice = createSlice({
-  name: 'menu',
+  name: 'menu', // Name of this slice
   initialState,
-  // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     increment: (state) => {
     }
@@ -46,20 +49,20 @@ export const menuSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(menuAsync.pending, (state) => {
-        state.status = 'loading';
+        state.status = 'loading'; // Set status to loading when fetch starts
       })
       .addCase(menuAsync.fulfilled, (state, action) => {
-        state.status = 'idle';
-        state.items = action.payload;
+        state.status = 'idle'; // Reset status when fetch is successful
+        state.items = action.payload; // Update items with fetched data
       })
       .addCase(menuAsync.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message ?? "Unknown error"; // Use default message if error message is undefined
+        state.status = 'failed'; // Set status to failed on error
+        state.error = action.error.message ?? "Unknown error"; // Store error message
       });
   },
 });
 
-
+// Selector function to access menu items from the state
 export const selectMenu = (state: RootState) => state.menu.items;
 
 export default menuSlice.reducer;

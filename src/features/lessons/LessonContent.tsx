@@ -8,31 +8,33 @@ import { speakText } from '../../shared/utils/speakText';
 import { useFetchPhotos } from '../../shared/hooks/useFetchPhotos';
 
 
+// Component to display the content of a specific lesson
 const LessonContent = ({ lessonId }: { lessonId: number }) => {
+    // Hook to dispatch actions to the Redux store
     const dispatch = useDispatch<AppDispatch>();
+    // Accessing the lesson content state from the Redux store
     const { content, status, error } = useSelector((state: RootState) => state.lessonContent);
+    // Custom hook to fetch photos related to the lesson content
     const photos = useFetchPhotos(content)
 
-    console.log("lessonId: " + lessonId)
-
+    // Fetch lesson content when the component mounts or the lessonId changes
     useEffect(() => {
         dispatch(fetchContent(lessonId));
     }, [dispatch, lessonId])
 
 
-    // Render content based on status
+     // Conditional rendering based on the loading status and presence of errors
     if (status === 'loading') return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
-    console.log("no status or error")
+
+    // Rendering the lesson content
     return(
         <div className="container">
             {content.map((item: LessonContentItem) => (
                 <div key={item.id} className="d-flex justify-content-start align-items-center mb-3" style={{direction:'rtl'}}>{/*Adjusted for RTL*/}
-                    
-                    {/* Hebrew word (right) */}
+                   {/* Display the Hebrew word */}
                     <div className="ms-3" style={{ minWidth: "100px" }}>{item.word_hebrew}</div>
-
-                    {/* Image (center) */}
+                    {/* Display the associated image */}
                     {photos[item.id] && (
                         <img 
                             src={photos[item.id]} 
@@ -41,7 +43,7 @@ const LessonContent = ({ lessonId }: { lessonId: number }) => {
                             style={{ width: '200px', height: '200px', objectFit: 'cover' }}
                         />
                     )}
-                    {/* French word (left) with Listen Button */}
+                    {/* Display the French word with a button to listen to its pronunciation */}
                     <div className="me-3" >
                         {item.word_french}
                         <button onClick={() => speakText(item.word_french)} className="ms-2">
