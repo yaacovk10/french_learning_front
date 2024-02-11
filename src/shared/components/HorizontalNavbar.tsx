@@ -4,6 +4,7 @@ import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { logout, selectlogged } from '../../features/authentication/loginSlice';
+import personIcon from '../assets/icons/user.png'
 
 const HorizontalNavbar = () => {
   const logged = useAppSelector(selectlogged)
@@ -13,13 +14,13 @@ const HorizontalNavbar = () => {
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light" dir="rtl">
       <Container>
         <LinkContainer to="/lessons">
-          <Navbar.Brand>האפליקציה שלי</Navbar.Brand>
+          <Navbar.Brand>צרפתית בכיף</Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ms-auto"> {/* Changed from me-auto to ms-auto */}
             {/* Reversed the order of items to fit RTL layout */}
-             <NavDropdown title="חשבון" id="collapsible-nav-dropdown" className="order-3">
+             <NavDropdown title ={<img src={personIcon} alt="חשבון" style={{ width: '24px', height: '24px' }} />} id="collapsible-nav-dropdown" className="order-3">
               {logged ? (
                 <NavDropdown.Item onClick={() => dispach(logout())}>התנתקות</NavDropdown.Item>
               ) : (

@@ -43,7 +43,7 @@ export const useSpeechRecognition = (
       silenceTimer = setTimeout(() => {
         console.log("Silence detected, stopping recognition.");
         stopListening();
-      }, 1000); // Set the silence timeout to 1 second
+      }, 500); // Set the silence timeout to 1 second
     }
   };
 
