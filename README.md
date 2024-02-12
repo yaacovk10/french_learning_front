@@ -1,46 +1,60 @@
-# Getting Started with Create React App
+# French Learning Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
+This application is designed to help users learn French through interactive lessons and exercises. It leverages React Redux for state management, providing a robust and scalable solution for web application development.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Interactive Lessons**: Engage with lessons designed to teach French in an interactive manner.
+- **Exercises**: Test your knowledge and pronunciation with exercises that provide instant feedback.
+- **Speech Synthesis**: Utilize the Web Speech API's speech synthesis interface to hear how words are pronounced.
+- **Speech Recognition**: Practice pronunciation and receive feedback through speech recognition technology.
+- **Photo Illustrations**: Each word comes with a photo fetched from Pexels API to enhance learning through visual aids.
 
-### `npm start`
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- React Redux: For efficient state management across the application.
+- React Bootstrap: For responsive design and layout.
+- Pexels API: To fetch relevant photos for each word or phrase.
+- Web Speech API: For speech synthesis and recognition functionalities.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+To run this project locally, ensure you have [Node.js](https://nodejs.org/) installed on your system. Then, follow these steps:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repository to your local machine:
+    ```bash
+    git clone https://github.com/yaacovk10/french_learning_front.git
+    ```
+2. Navigate to the project directory:
+    ```bash
+    cd my-app
+    ```
+3. Install dependencies:
+    ```bash
+    npm install react react-dom react-scripts redux react-redux @reduxjs/toolkit react-router-dom react-bootstrap bootstrap axios
 
-### `npm run build`
+    ```
+4. Start the development server:
+    ```bash
+    npm start
+    ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The application will now be running on [http://localhost:3000](http://localhost:3000).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Backend Integration
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This project is designed to interact with a backend service that provides data for learning French. Ensure the backend service is running and accessible. The application fetches lesson content, exercises, and other relevant data from this service to provide an immersive learning experience.
 
-### `npm run eject`
+## External Features
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- **React Bootstrap**: For modern, responsive UI components.
+- **Pexels API**: Used to fetch and display photos related to the learning content.
+- **Web Speech API**: For implementing speech synthesis and recognition to aid in learning pronunciation.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Contribution
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Contributions are welcome. Please feel free to fork the repository, make changes, and submit pull requests.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## License
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project is open-source and available under the MIT License.

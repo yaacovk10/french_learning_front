@@ -4,21 +4,24 @@ import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { logout, selectlogged, selectUsername } from '../../features/authentication/loginSlice';
+
+// Import styles and assets
 import personIcon from '../assets/icons/user.png'
-import styles from './HorizontalNavbar.module.css'; // Adjust the path as necessary
+import styles from './HorizontalNavbar.module.css'; 
 
-
+// Functional component for the horizontal navigation bar
 const HorizontalNavbar = () => {
-  const logged = useAppSelector(selectlogged)
-  const username = useAppSelector(selectUsername); // Get the username
-  console.log("username", username)
-  const dispach = useAppDispatch();
+    // Use Redux hooks to access authentication state
+  const logged = useAppSelector(selectlogged) // Boolean indicating if user is logged in
+  const username = useAppSelector(selectUsername); // Username of the logged-in user
+  const dispach = useAppDispatch();// Function to dispatch actions
 
-  // Function to get the first two letters of the username
+    // Helper function to extract user initials from username
   const getUserInitials = (username: string) => {
     return username ? username.substring(0, 2).toUpperCase() : '';
   };
 
+  // Render the navigation bar
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light" dir="rtl">
       <Container>
@@ -28,7 +31,7 @@ const HorizontalNavbar = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="justify-content-start"> {/* Changed from me-auto to ms-auto */}
-            {/* Reversed the order of items to fit RTL layout */}
+            {/* Conditional rendering for user icon or initials based on login state */}
             <NavDropdown
               title={
                 logged ? (
@@ -42,6 +45,7 @@ const HorizontalNavbar = () => {
               id="collapsible-nav-dropdown"
               className={`order-4 ${styles.navDropdown}`}
             >
+               {/* Conditional rendering for logout or login/signup options */}
               {logged ? (
                 <NavDropdown.Item onClick={() => dispach(logout())}>התנתקות</NavDropdown.Item>
               ) : (
@@ -55,6 +59,7 @@ const HorizontalNavbar = () => {
                 </>
               )}
             </NavDropdown>
+            {/* Links to site sections with order adjusted for RTL layout */}
             <LinkContainer to="/about" className={`order-3 ${styles.navLinkContainer}`}>
               <Nav.Link>אודות האתר</Nav.Link>
             </LinkContainer>
